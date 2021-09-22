@@ -5,9 +5,9 @@ using System;
 
 namespace PS.Template.Domain.EntitiesConfiguration
 {
-    public class CursoConfiguration : IEntityTypeConfiguration<Curso>
+    public class CursoConfiguration : IEntityTypeConfiguration<Plan>
     {
-        public void Configure(EntityTypeBuilder<Curso> builder)
+        public void Configure(EntityTypeBuilder<Plan> builder)
         {
 
             builder.HasKey(c => c.CursoId);

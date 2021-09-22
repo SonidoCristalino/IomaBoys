@@ -11,12 +11,12 @@ namespace PS.Template.AccessData
         { }
 
         public DbSet<Docente> Docente { get; set; }
-        public DbSet<Curso> Curso { get; set; }
+        public DbSet<Plan> Curso { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration<Docente>(new DocenteConfiguration());
-            modelBuilder.ApplyConfiguration<Curso>(new CursoConfiguration());
+            modelBuilder.ApplyConfiguration<Plan>(new CursoConfiguration());
         }
 
     }
