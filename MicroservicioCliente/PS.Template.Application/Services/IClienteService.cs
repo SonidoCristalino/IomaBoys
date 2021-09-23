@@ -3,8 +3,8 @@ using PS.Template.Domain.Entities;
 
 namespace PS.Template.Application.Services
 {
-    public interface IDocenteService
+    public interface IClienteService
     {
-        Docente CreateDocente(DocenteDTO docente);
+        Cliente CreateCliente(ClienteDTO cliente);
     }
 }

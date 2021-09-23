@@ -5,6 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PS.Template.AccessData;
+using PS.Template.AccessData.Commands;
+using PS.Template.Application.Services;
+using PS.Template.Domain.Commands;
 
 namespace PS.Template.API
 {
@@ -23,6 +26,10 @@ namespace PS.Template.API
             services.AddControllers();
             var connectionString = Configuration.GetSection("ConnectionString").Value;
             services.AddDbContext<TemplateDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddTransient<IGenericsRepository, GenericsRepository>();
+            services.AddTransient<IClienteService, ClienteService>();
+            services.AddTransient<IHistoriaClinicaService, HistoriaClinicaService>();
 
         }
 

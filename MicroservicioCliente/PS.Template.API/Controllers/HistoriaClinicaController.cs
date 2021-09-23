@@ -7,18 +7,18 @@ namespace PS.Template.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DocenteController : ControllerBase
+    public class HistoriaClinicaController : ControllerBase
     {
-        private readonly IDocenteService _service;
-        public DocenteController(IDocenteService service)
+        private readonly IHistoriaClinicaService _service;
+        public HistoriaClinicaController(IHistoriaClinicaService service)
         {
             _service = service;   
         }
 
         [HttpPost]
-        public Docente Post(DocenteDTO docente)
+        public HistoriaClinica Post(HistoriaClinicaDTO historiaClinica)
         {
-            return _service.CreateDocente(docente);
+            return _service.CreateHistoriaClinica(historiaClinica);
         }
     }
 }

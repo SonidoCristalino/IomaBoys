@@ -10,13 +10,17 @@ namespace PS.Template.AccessData
         public TemplateDbContext(DbContextOptions<TemplateDbContext> options) : base(options)
         { }
 
-        public DbSet<Docente> Docente { get; set; }
-        public DbSet<Curso> Curso { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<HistoriaClinica> HistoriaClinica { get; set; }
+        public DbSet<Partido> Partido { get; set; }
+        public DbSet<Plan> Plan { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration<Docente>(new DocenteConfiguration());
-            modelBuilder.ApplyConfiguration<Curso>(new CursoConfiguration());
+            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
+            modelBuilder.ApplyConfiguration(new HistoriaClinicaConfiguration());
+            modelBuilder.ApplyConfiguration(new PartidoConfiguration());
+            modelBuilder.ApplyConfiguration(new PlanConfiguration());
         }
 
     }
