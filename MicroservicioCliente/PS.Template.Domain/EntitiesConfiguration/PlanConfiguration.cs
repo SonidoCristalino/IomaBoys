@@ -9,7 +9,9 @@ namespace PS.Template.Domain.EntitiesConfiguration
     {
         public void Configure(EntityTypeBuilder<Plan> builder)
         {
-            builder.HasKey(pla => pla.PlainId);
+            builder.HasKey(pla => pla.PlanId);
+            builder.Property(pla => pla.PlanId)
+                    .ValueGeneratedOnAdd();
 
             builder.Property(pla => pla.NombrePlan)
                    .IsRequired(true)
@@ -28,8 +30,8 @@ namespace PS.Template.Domain.EntitiesConfiguration
                    .HasMaxLength(10);
 
             builder.HasData(
-                new Plan { PlainId = 1, NombrePlan = "Basico", Descripcion = "Descuento del 15% en especialidades comunes", Descuento = 15, PrecioPlan = 1500},
-                new Plan { PlainId = 2, NombrePlan = "Premium", Descripcion = "Descuento del 35% en todo tipo de especialidades" , Descuento = 35, PrecioPlan = 3500 }
+                new Plan { PlanId = 1, NombrePlan = "Basico", Descripcion = "Descuento del 15% en especialidades comunes", Descuento = 15, PrecioPlan = 1500},
+                new Plan { PlanId = 2, NombrePlan = "Premium", Descripcion = "Descuento del 35% en todo tipo de especialidades" , Descuento = 35, PrecioPlan = 3500 }
                             );
         }
     }

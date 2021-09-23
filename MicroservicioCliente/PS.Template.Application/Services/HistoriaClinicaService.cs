@@ -22,7 +22,7 @@ namespace PS.Template.Application.Services
                 HistoriaClinicaId = historiaClinica.HistoriaClinicaId,
                 TurnoId = historiaClinica.TurnoId,
                 Diagnostico = historiaClinica.Diagnostico,
-                Imagen = historiaClinica.Imagen
+                Imagen = historiaClinica.Imagen,
             };
 
             _repository.Add<HistoriaClinica>(entity);

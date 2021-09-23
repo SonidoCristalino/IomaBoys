@@ -10,18 +10,20 @@ namespace PS.Template.Domain.EntitiesConfiguration
         public void Configure(EntityTypeBuilder<Cliente> builder)
         {
             builder.HasKey(cli => cli.ClienteId);
+            builder.Property(cli => cli.ClienteId)
+                   .ValueGeneratedOnAdd();
 
             builder.Property(cli => cli.TipoId)
                    .IsRequired(true)
                    .HasMaxLength(2);
 
             builder.Property(cli => cli.PlanId)
-                   .IsRequired(true)
-                   .HasMaxLength(2);
+                   .IsRequired(true);
 
             builder.Property(cli => cli.PartidoId)
-                   .IsRequired(true)
-                   .HasMaxLength(3);
+                   .IsRequired(true);
+
+            builder.HasOne(Par => Par.Partidos).WithMany(cli => cli.Clientes);
 
             builder.Property(cli => cli.Nombre)
                    .IsRequired(true)

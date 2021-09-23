@@ -24,6 +24,7 @@ namespace PS.Template.Domain.EntitiesConfiguration
             builder.Property(hc => hc.Imagen)
                    .IsRequired(true)
                    .HasMaxLength(255);
+       
         }
     }
 }

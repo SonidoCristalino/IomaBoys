@@ -7,27 +7,6 @@ namespace PS.Template.AccessData.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Cliente",
-                columns: table => new
-                {
-                    ClienteId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoId = table.Column<int>(type: "int", maxLength: 2, nullable: false),
-                    PlanId = table.Column<int>(type: "int", maxLength: 2, nullable: false),
-                    PartidoId = table.Column<int>(type: "int", maxLength: 3, nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    DNI = table.Column<int>(type: "int", maxLength: 8, nullable: false),
-                    NumeroCelular = table.Column<int>(type: "int", maxLength: 10, nullable: false),
-                    Mail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Contraseña = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cliente", x => x.ClienteId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "HistoriaClinica",
                 columns: table => new
                 {
@@ -59,7 +38,7 @@ namespace PS.Template.AccessData.Migrations
                 name: "Plan",
                 columns: table => new
                 {
-                    PlainId = table.Column<int>(type: "int", nullable: false)
+                    PlanId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NombrePlan = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
@@ -68,7 +47,47 @@ namespace PS.Template.AccessData.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Plan", x => x.PlainId);
+                    table.PrimaryKey("PK_Plan", x => x.PlanId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cliente",
+                columns: table => new
+                {
+                    ClienteId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoId = table.Column<int>(type: "int", maxLength: 2, nullable: false),
+                    PlanId = table.Column<int>(type: "int", nullable: false),
+                    PartidoId = table.Column<int>(type: "int", nullable: false),
+                    HistoriaClinicaId = table.Column<int>(type: "int", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DNI = table.Column<int>(type: "int", maxLength: 8, nullable: false),
+                    NumeroCelular = table.Column<int>(type: "int", maxLength: 10, nullable: false),
+                    Mail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Contraseña = table.Column<int>(type: "int", maxLength: 10, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cliente", x => x.ClienteId);
+                    table.ForeignKey(
+                        name: "FK_Cliente_HistoriaClinica_HistoriaClinicaId",
+                        column: x => x.HistoriaClinicaId,
+                        principalTable: "HistoriaClinica",
+                        principalColumn: "HistoriaClinicaId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cliente_Partido_PartidoId",
+                        column: x => x.PartidoId,
+                        principalTable: "Partido",
+                        principalColumn: "PartidoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cliente_Plan_PlanId",
+                        column: x => x.PlanId,
+                        principalTable: "Plan",
+                        principalColumn: "PlanId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -83,12 +102,29 @@ namespace PS.Template.AccessData.Migrations
 
             migrationBuilder.InsertData(
                 table: "Plan",
-                columns: new[] { "PlainId", "Descripcion", "Descuento", "NombrePlan", "PrecioPlan" },
+                columns: new[] { "PlanId", "Descripcion", "Descuento", "NombrePlan", "PrecioPlan" },
                 values: new object[,]
                 {
                     { 1, "Descuento del 15% en especialidades comunes", 15.0, "Basico", 1500.0 },
                     { 2, "Descuento del 35% en todo tipo de especialidades", 35.0, "Premium", 3500.0 }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cliente_HistoriaClinicaId",
+                table: "Cliente",
+                column: "HistoriaClinicaId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cliente_PartidoId",
+                table: "Cliente",
+                column: "PartidoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cliente_PlanId",
+                table: "Cliente",
+                column: "PlanId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

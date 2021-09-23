@@ -8,5 +8,6 @@ namespace PS.Template.Domain.Entities
     {
         public int PartidoId { get; set; }
         public string Nombre { get; set; }
+        public virtual IList<Cliente> Clientes { get; set; }
     }
 }

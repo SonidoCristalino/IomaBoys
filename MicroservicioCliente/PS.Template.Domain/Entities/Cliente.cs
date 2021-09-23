@@ -14,6 +14,9 @@ namespace PS.Template.Domain.Entities
         public int DNI { get; set; }
         public int NumeroCelular { get; set; }
         public string Mail { get; set; }
-        public string Contraseña { get; set; }
+        public int Contraseña { get; set; }
+        public Plan Planes { get; set; }
+        public Partido Partidos { get; set; }
+        public HistoriaClinica HistoriaClinicas { get; set; }
     }
 }

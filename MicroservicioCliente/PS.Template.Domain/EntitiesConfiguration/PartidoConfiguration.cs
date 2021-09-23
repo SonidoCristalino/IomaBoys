@@ -10,6 +10,8 @@ namespace PS.Template.Domain.EntitiesConfiguration
         public void Configure(EntityTypeBuilder<Partido> builder)
         {
             builder.HasKey(par => par.PartidoId);
+            builder.Property(par => par.PartidoId)
+                   .ValueGeneratedOnAdd();
 
             builder.Property(par => par.Nombre)
                    .IsRequired(true)

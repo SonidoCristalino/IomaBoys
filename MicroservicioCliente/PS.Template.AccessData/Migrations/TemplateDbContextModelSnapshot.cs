@@ -30,13 +30,15 @@ namespace PS.Template.AccessData.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Contraseña")
-                        .IsRequired()
+                    b.Property<int>("Contraseña")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("int");
 
                     b.Property<int>("DNI")
                         .HasMaxLength(8)
+                        .HasColumnType("int");
+
+                    b.Property<int>("HistoriaClinicaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Mail")
@@ -54,11 +56,9 @@ namespace PS.Template.AccessData.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("PartidoId")
-                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     b.Property<int>("PlanId")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<int>("TipoId")
@@ -66,6 +66,14 @@ namespace PS.Template.AccessData.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ClienteId");
+
+                    b.HasIndex("HistoriaClinicaId")
+                        .IsUnique();
+
+                    b.HasIndex("PartidoId");
+
+                    b.HasIndex("PlanId")
+                        .IsUnique();
 
                     b.ToTable("Cliente");
                 });
@@ -132,7 +140,7 @@ namespace PS.Template.AccessData.Migrations
 
             modelBuilder.Entity("PS.Template.Domain.Entities.Plan", b =>
                 {
-                    b.Property<int>("PlainId")
+                    b.Property<int>("PlanId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -155,14 +163,14 @@ namespace PS.Template.AccessData.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("float");
 
-                    b.HasKey("PlainId");
+                    b.HasKey("PlanId");
 
                     b.ToTable("Plan");
 
                     b.HasData(
                         new
                         {
-                            PlainId = 1,
+                            PlanId = 1,
                             Descripcion = "Descuento del 15% en especialidades comunes",
                             Descuento = 15.0,
                             NombrePlan = "Basico",
@@ -170,12 +178,54 @@ namespace PS.Template.AccessData.Migrations
                         },
                         new
                         {
-                            PlainId = 2,
+                            PlanId = 2,
                             Descripcion = "Descuento del 35% en todo tipo de especialidades",
                             Descuento = 35.0,
                             NombrePlan = "Premium",
                             PrecioPlan = 3500.0
                         });
+                });
+
+            modelBuilder.Entity("PS.Template.Domain.Entities.Cliente", b =>
+                {
+                    b.HasOne("PS.Template.Domain.Entities.HistoriaClinica", "HistoriaClinicas")
+                        .WithOne("Clientes")
+                        .HasForeignKey("PS.Template.Domain.Entities.Cliente", "HistoriaClinicaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PS.Template.Domain.Entities.Partido", "Partidos")
+                        .WithMany("Clientes")
+                        .HasForeignKey("PartidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PS.Template.Domain.Entities.Plan", "Planes")
+                        .WithOne("Clientes")
+                        .HasForeignKey("PS.Template.Domain.Entities.Cliente", "PlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HistoriaClinicas");
+
+                    b.Navigation("Partidos");
+
+                    b.Navigation("Planes");
+                });
+
+            modelBuilder.Entity("PS.Template.Domain.Entities.HistoriaClinica", b =>
+                {
+                    b.Navigation("Clientes");
+                });
+
+            modelBuilder.Entity("PS.Template.Domain.Entities.Partido", b =>
+                {
+                    b.Navigation("Clientes");
+                });
+
+            modelBuilder.Entity("PS.Template.Domain.Entities.Plan", b =>
+                {
+                    b.Navigation("Clientes");
                 });
 #pragma warning restore 612, 618
         }

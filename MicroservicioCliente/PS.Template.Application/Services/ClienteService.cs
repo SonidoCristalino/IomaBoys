@@ -19,10 +19,10 @@ namespace PS.Template.Application.Services
 
             var entity = new Cliente
             {
-                ClienteId = cliente.ClienteId,
                 TipoId = cliente.TipoId,
                 PlanId = cliente.PlanId,
                 PartidoId = cliente.PartidoId,
+                HistoriaClinicaId = cliente.HistoriaClinicaId,
                 Apellido = cliente.Apellido,
                 Nombre = cliente.Nombre,
                 DNI = cliente.DNI,
