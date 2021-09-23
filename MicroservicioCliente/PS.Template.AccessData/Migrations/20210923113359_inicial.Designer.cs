@@ -9,8 +9,8 @@ using PS.Template.AccessData;
 namespace PS.Template.AccessData.Migrations
 {
     [DbContext(typeof(TemplateDbContext))]
-    [Migration("20210923071419_prueba1")]
-    partial class prueba1
+    [Migration("20210923113359_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

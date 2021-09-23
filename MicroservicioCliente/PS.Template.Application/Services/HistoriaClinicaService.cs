@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace PS.Template.Application.Services
 {
-    class HistoriaClinicaService
+    public class HistoriaClinicaService : IHistoriaClinicaService
     {
         private readonly IGenericsRepository _repository;
         public HistoriaClinicaService(IGenericsRepository repository)

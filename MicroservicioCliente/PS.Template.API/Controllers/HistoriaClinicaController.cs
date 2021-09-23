@@ -9,8 +9,8 @@ namespace PS.Template.API.Controllers
     [ApiController]
     public class HistoriaClinicaController : ControllerBase
     {
-        private readonly IHistoriaClinica _service;
-        public HistoriaClinicaController(IHistoriaClinica service)
+        private readonly IHistoriaClinicaService _service;
+        public HistoriaClinicaController(IHistoriaClinicaService service)
         {
             _service = service;   
         }

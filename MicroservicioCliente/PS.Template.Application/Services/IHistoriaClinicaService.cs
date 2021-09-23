@@ -4,8 +4,8 @@ using PS.Template.Domain.Entities;
 
 namespace PS.Template.Application.Services
 {
-    public interface IHistoriaClinica
+    public interface IHistoriaClinicaService
     {
-        HistoriaClinica CreateHistoriaClinica(HistoriaClinicaDTO historialClinica);
+        HistoriaClinica CreateHistoriaClinica(HistoriaClinicaDTO historiaClinica);
     }
 }

@@ -17,10 +17,10 @@ namespace PS.Template.AccessData
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration<Cliente>(new ClienteConfiguration());
-            modelBuilder.ApplyConfiguration<HistoriaClinica>(new HistoriaClinicaConfiguration());
-            modelBuilder.ApplyConfiguration<Partido>(new PartidoConfiguration());
-            modelBuilder.ApplyConfiguration<Plan>(new PlanConfiguration());
+            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
+            modelBuilder.ApplyConfiguration(new HistoriaClinicaConfiguration());
+            modelBuilder.ApplyConfiguration(new PartidoConfiguration());
+            modelBuilder.ApplyConfiguration(new PlanConfiguration());
         }
 
     }
