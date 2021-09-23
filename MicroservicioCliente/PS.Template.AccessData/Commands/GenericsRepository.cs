@@ -15,5 +15,15 @@ namespace PS.Template.AccessData.Commands
             _context.Add(entity);
             _context.SaveChanges();
         }
+        public void Remove<T>(T entity) where T : class
+        {
+            _context.Remove(entity);
+            _context.SaveChanges();
+        }
+        public void Update<T>(T entity) where T : class
+        {
+            _context.Update(entity);
+            _context.SaveChanges();
+        }
     }
 }
