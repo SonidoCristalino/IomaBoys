@@ -46,6 +46,7 @@ namespace PS.Template.AccessData.Migrations
                     PartidoId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DNI = table.Column<int>(type: "int", maxLength: 8, nullable: false),
                     NumeroCelular = table.Column<int>(type: "int", maxLength: 10, nullable: false),
                     Mail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -117,8 +118,7 @@ namespace PS.Template.AccessData.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cliente_PlanId",
                 table: "Cliente",
-                column: "PlanId",
-                unique: true);
+                column: "PlanId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HistoriaClinica_ClienteId",

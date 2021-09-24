@@ -20,6 +20,8 @@ namespace PS.Template.Domain.EntitiesConfiguration
             builder.Property(cli => cli.PlanId)
                    .IsRequired(true);
 
+            builder.HasOne(Pla => Pla.Planes).WithMany(cli => cli.Clientes);
+
             builder.Property(cli => cli.PartidoId)
                    .IsRequired(true);
 

@@ -10,6 +10,7 @@ namespace PS.Template.Domain.Entities
         public int PlanId { get; set; }
         public int PartidoId { get; set; }
         public string Nombre { get; set; }
+        public string Apellido { get; set; }
         public string Imagen { get; set; }
         public int DNI { get; set; }
         public int NumeroCelular { get; set; }

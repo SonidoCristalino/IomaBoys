@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PS.Template.Domain.Entities
 {
@@ -9,6 +10,6 @@ namespace PS.Template.Domain.Entities
         public string Descripcion { get; set; }
         public double Descuento { get; set; }
         public double PrecioPlan { get; set; }
-        public Cliente Clientes { get; set; }
+        public virtual IList<Cliente> Clientes { get; set; }
     }
 }

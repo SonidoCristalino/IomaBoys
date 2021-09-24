@@ -6,8 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PS.Template.AccessData;
 using PS.Template.AccessData.Commands;
+using PS.Template.AccessData.Queries;
 using PS.Template.Application.Services;
 using PS.Template.Domain.Commands;
+using PS.Template.Domain.Queries;
 
 namespace PS.Template.API
 {
@@ -30,6 +32,7 @@ namespace PS.Template.API
             services.AddTransient<IGenericsRepository, GenericsRepository>();
             services.AddTransient<IClienteService, ClienteService>();
             services.AddTransient<IHistoriaClinicaService, HistoriaClinicaService>();
+            services.AddTransient<IClienteQuery, ClienteQuery>();
 
         }
 

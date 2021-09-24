@@ -38,6 +38,9 @@ namespace PS.Template.AccessData.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("int");
 
+                    b.Property<string>("Imagen")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Mail")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -66,8 +69,7 @@ namespace PS.Template.AccessData.Migrations
 
                     b.HasIndex("PartidoId");
 
-                    b.HasIndex("PlanId")
-                        .IsUnique();
+                    b.HasIndex("PlanId");
 
                     b.ToTable("Cliente");
                 });
@@ -195,8 +197,8 @@ namespace PS.Template.AccessData.Migrations
                         .IsRequired();
 
                     b.HasOne("PS.Template.Domain.Entities.Plan", "Planes")
-                        .WithOne("Clientes")
-                        .HasForeignKey("PS.Template.Domain.Entities.Cliente", "PlanId")
+                        .WithMany("Clientes")
+                        .HasForeignKey("PlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
