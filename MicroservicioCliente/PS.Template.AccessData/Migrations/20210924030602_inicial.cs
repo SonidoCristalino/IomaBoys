@@ -7,21 +7,6 @@ namespace PS.Template.AccessData.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "HistoriaClinica",
-                columns: table => new
-                {
-                    HistoriaClinicaId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TurnoId = table.Column<int>(type: "int", maxLength: 255, nullable: false),
-                    Diagnostico = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Imagen = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HistoriaClinica", x => x.HistoriaClinicaId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Partido",
                 columns: table => new
                 {
@@ -59,7 +44,6 @@ namespace PS.Template.AccessData.Migrations
                     TipoId = table.Column<int>(type: "int", maxLength: 2, nullable: false),
                     PlanId = table.Column<int>(type: "int", nullable: false),
                     PartidoId = table.Column<int>(type: "int", nullable: false),
-                    HistoriaClinicaId = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DNI = table.Column<int>(type: "int", maxLength: 8, nullable: false),
@@ -71,12 +55,6 @@ namespace PS.Template.AccessData.Migrations
                 {
                     table.PrimaryKey("PK_Cliente", x => x.ClienteId);
                     table.ForeignKey(
-                        name: "FK_Cliente_HistoriaClinica_HistoriaClinicaId",
-                        column: x => x.HistoriaClinicaId,
-                        principalTable: "HistoriaClinica",
-                        principalColumn: "HistoriaClinicaId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Cliente_Partido_PartidoId",
                         column: x => x.PartidoId,
                         principalTable: "Partido",
@@ -87,6 +65,28 @@ namespace PS.Template.AccessData.Migrations
                         column: x => x.PlanId,
                         principalTable: "Plan",
                         principalColumn: "PlanId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HistoriaClinica",
+                columns: table => new
+                {
+                    HistoriaClinicaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClienteId = table.Column<int>(type: "int", nullable: false),
+                    TurnoId = table.Column<int>(type: "int", maxLength: 255, nullable: false),
+                    Diagnostico = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Imagen = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HistoriaClinica", x => x.HistoriaClinicaId);
+                    table.ForeignKey(
+                        name: "FK_HistoriaClinica_Cliente_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Cliente",
+                        principalColumn: "ClienteId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -110,12 +110,6 @@ namespace PS.Template.AccessData.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cliente_HistoriaClinicaId",
-                table: "Cliente",
-                column: "HistoriaClinicaId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Cliente_PartidoId",
                 table: "Cliente",
                 column: "PartidoId");
@@ -125,15 +119,21 @@ namespace PS.Template.AccessData.Migrations
                 table: "Cliente",
                 column: "PlanId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HistoriaClinica_ClienteId",
+                table: "HistoriaClinica",
+                column: "ClienteId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Cliente");
+                name: "HistoriaClinica");
 
             migrationBuilder.DropTable(
-                name: "HistoriaClinica");
+                name: "Cliente");
 
             migrationBuilder.DropTable(
                 name: "Partido");

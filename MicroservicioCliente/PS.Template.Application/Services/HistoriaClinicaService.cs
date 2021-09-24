@@ -20,6 +20,7 @@ namespace PS.Template.Application.Services
             var entity = new HistoriaClinica
             {
                 HistoriaClinicaId = historiaClinica.HistoriaClinicaId,
+                ClienteId = historiaClinica.ClienteId,
                 TurnoId = historiaClinica.TurnoId,
                 Diagnostico = historiaClinica.Diagnostico,
                 Imagen = historiaClinica.Imagen,

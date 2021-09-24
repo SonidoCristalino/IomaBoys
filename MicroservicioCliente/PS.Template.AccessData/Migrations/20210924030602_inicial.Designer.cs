@@ -9,7 +9,7 @@ using PS.Template.AccessData;
 namespace PS.Template.AccessData.Migrations
 {
     [DbContext(typeof(TemplateDbContext))]
-    [Migration("20210923230306_inicial")]
+    [Migration("20210924030602_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,9 +40,6 @@ namespace PS.Template.AccessData.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("int");
 
-                    b.Property<int>("HistoriaClinicaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Mail")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -69,9 +66,6 @@ namespace PS.Template.AccessData.Migrations
 
                     b.HasKey("ClienteId");
 
-                    b.HasIndex("HistoriaClinicaId")
-                        .IsUnique();
-
                     b.HasIndex("PartidoId");
 
                     b.HasIndex("PlanId")
@@ -86,6 +80,9 @@ namespace PS.Template.AccessData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Diagnostico")
                         .IsRequired()
@@ -102,6 +99,9 @@ namespace PS.Template.AccessData.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("HistoriaClinicaId");
+
+                    b.HasIndex("ClienteId")
+                        .IsUnique();
 
                     b.ToTable("HistoriaClinica");
                 });
@@ -190,12 +190,6 @@ namespace PS.Template.AccessData.Migrations
 
             modelBuilder.Entity("PS.Template.Domain.Entities.Cliente", b =>
                 {
-                    b.HasOne("PS.Template.Domain.Entities.HistoriaClinica", "HistoriaClinicas")
-                        .WithOne("Clientes")
-                        .HasForeignKey("PS.Template.Domain.Entities.Cliente", "HistoriaClinicaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PS.Template.Domain.Entities.Partido", "Partidos")
                         .WithMany("Clientes")
                         .HasForeignKey("PartidoId")
@@ -208,8 +202,6 @@ namespace PS.Template.AccessData.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("HistoriaClinicas");
-
                     b.Navigation("Partidos");
 
                     b.Navigation("Planes");
@@ -217,7 +209,18 @@ namespace PS.Template.AccessData.Migrations
 
             modelBuilder.Entity("PS.Template.Domain.Entities.HistoriaClinica", b =>
                 {
+                    b.HasOne("PS.Template.Domain.Entities.Cliente", "Clientes")
+                        .WithOne("HistoriaClinicas")
+                        .HasForeignKey("PS.Template.Domain.Entities.HistoriaClinica", "ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Clientes");
+                });
+
+            modelBuilder.Entity("PS.Template.Domain.Entities.Cliente", b =>
+                {
+                    b.Navigation("HistoriaClinicas");
                 });
 
             modelBuilder.Entity("PS.Template.Domain.Entities.Partido", b =>

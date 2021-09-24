@@ -22,7 +22,6 @@ namespace PS.Template.Application.Services
                 TipoId = cliente.TipoId,
                 PlanId = cliente.PlanId,
                 PartidoId = cliente.PartidoId,
-                HistoriaClinicaId = cliente.HistoriaClinicaId,
                 Apellido = cliente.Apellido,
                 Nombre = cliente.Nombre,
                 DNI = cliente.DNI,
