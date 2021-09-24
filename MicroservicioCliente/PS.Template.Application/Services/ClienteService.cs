@@ -9,6 +9,7 @@ namespace PS.Template.Application.Services
     public class ClienteService : IClienteService
     {
         private readonly IGenericsRepository _repository;
+
         public ClienteService(IGenericsRepository repository)
         {
             _repository = repository;
