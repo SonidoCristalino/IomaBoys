@@ -34,15 +34,16 @@ namespace PS.Template.Application.Services
                 Mail = cliente.Mail,
                 Contraseña = cliente.Contraseña
             };
-
             _repository.Add<Cliente>(entity);
-
             return entity;
-        }
-        
+        }     
         public IList<ClienteDTO> GetAll()
         {
             return _query.GetAll();
+        }
+        public Cliente GetById(int clienteId)
+        {
+            return _query.GetById(clienteId);
         }
     }
 }

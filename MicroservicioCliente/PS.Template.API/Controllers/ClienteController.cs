@@ -28,5 +28,11 @@ namespace PS.Template.API.Controllers
             return _service.GetAll();
         }
 
+        [HttpGet("{clienteId:int}")]
+        
+        public Cliente GetClienteById(int clienteId)
+        {
+            return _service.GetById(clienteId);
+        }
     }
 }

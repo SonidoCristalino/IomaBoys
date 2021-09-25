@@ -8,5 +8,6 @@ namespace PS.Template.Application.Services
     {
         Cliente CreateCliente(ClienteDTO cliente);
         IList<ClienteDTO> GetAll();
+        Cliente GetById(int clienteId);
     }
 }

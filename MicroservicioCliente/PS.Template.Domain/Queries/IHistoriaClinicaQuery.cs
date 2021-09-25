@@ -9,7 +9,7 @@ namespace PS.Template.Domain.Queries
     public interface IHistoriaClinicaQuery
     {
         IList<HistoriaClinicaDTO> GetAll();
-        HistoriaClinica GetById(int clienteId);
+        HistoriaClinica GetById(int historiaClinicaId);
 
         
     }

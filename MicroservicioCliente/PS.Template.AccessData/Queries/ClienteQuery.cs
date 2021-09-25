@@ -11,13 +11,10 @@ namespace PS.Template.AccessData.Queries
     public class ClienteQuery : IClienteQuery
     {
         private readonly TemplateDbContext _context;
-
-
         public ClienteQuery(TemplateDbContext context)
         {
             _context = context;
         }
-
         public IList<ClienteDTO> GetAll()
         {
             var clientes = _context.Cliente
@@ -35,19 +32,13 @@ namespace PS.Template.AccessData.Queries
                  })
                  .ToList();        
             return clientes;
-
         }
-
         public Cliente GetById(int clienteId)
         {
             var cliente = _context.Cliente
                 .Where(c => c.ClienteId == clienteId)
                 .Select(c => c).FirstOrDefault();
-
             return cliente;
-
         }
-
-
     }
 }

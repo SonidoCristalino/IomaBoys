@@ -33,6 +33,7 @@ namespace PS.Template.API
             services.AddTransient<IClienteService, ClienteService>();
             services.AddTransient<IHistoriaClinicaService, HistoriaClinicaService>();
             services.AddTransient<IClienteQuery, ClienteQuery>();
+            services.AddTransient<IHistoriaClinicaQuery, HistoriaClinicaQuery>();
 
         }
 

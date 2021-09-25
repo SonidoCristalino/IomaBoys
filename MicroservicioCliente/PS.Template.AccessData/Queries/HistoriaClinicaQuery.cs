@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PS.Template.AccessData.Queries
 {
-    class HistoriaClinicaQuery : IHistoriaClinicaQuery
+    public class HistoriaClinicaQuery : IHistoriaClinicaQuery
     {
         private readonly TemplateDbContext _context;
         public HistoriaClinicaQuery(TemplateDbContext context)
@@ -21,7 +21,6 @@ namespace PS.Template.AccessData.Queries
             var HistoriaClinica = _context.HistoriaClinica
                .Select(c => new HistoriaClinicaDTO
                {
-                   HistoriaClinicaId = c.HistoriaClinicaId,
                    ClienteId = c.ClienteId,
                    TurnoId = c.TurnoId,
                    Diagnostico = c.Diagnostico,
@@ -30,10 +29,10 @@ namespace PS.Template.AccessData.Queries
                .ToList();
             return HistoriaClinica;
         }
-        public HistoriaClinica GetById(int historiaId)
+        public HistoriaClinica GetById(int historiaClinicaId)
         {
             var HistoriaClinica = _context.HistoriaClinica
-           .Where(c => c.HistoriaClinicaId == historiaId)
+           .Where(c => c.HistoriaClinicaId == historiaClinicaId)
            .Select(c => c).FirstOrDefault();
 
             return HistoriaClinica;

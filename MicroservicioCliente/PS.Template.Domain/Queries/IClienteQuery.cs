@@ -10,6 +10,5 @@ namespace PS.Template.Domain.Queries
     {
         IList<ClienteDTO>GetAll();
         Cliente GetById(int clienteId);
- 
     }
 }
